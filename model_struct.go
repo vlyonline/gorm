@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/jinzhu/inflection"
+	// "github.com/jinzhu/inflection"
 )
 
 // DefaultTableNameHandler default table name handler
@@ -55,10 +55,11 @@ func (s *ModelStruct) TableName(db *DB) string {
 		if tabler, ok := reflect.New(s.ModelType).Interface().(tabler); ok {
 			s.defaultTableName = tabler.TableName()
 		} else {
-			tableName := ToDBName(s.ModelType.Name())
-			if db == nil || !db.parent.singularTable {
-				tableName = inflection.Plural(tableName)
-			}
+			// tableName := ToDBName(s.ModelType.Name()) // modify by vlyonline
+			tableName := s.ModelType.Name()
+			// if db == nil || !db.parent.singularTable { // modify by vlyonline
+			// 	tableName = inflection.Plural(tableName)  // modify by vlyonline
+			// }																					// modify by vlyonline
 			s.defaultTableName = tableName
 		}
 	}
@@ -587,7 +588,8 @@ func (scope *Scope) GetModelStruct() *ModelStruct {
 			if value, ok := field.TagSettings["COLUMN"]; ok {
 				field.DBName = value
 			} else {
-				field.DBName = ToDBName(fieldStruct.Name)
+				// field.DBName = ToDBName(fieldStruct.Name) // modify by vlyonline
+				field.DBName = fieldStruct.Name
 			}
 
 			modelStruct.StructFields = append(modelStruct.StructFields, field)

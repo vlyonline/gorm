@@ -24,6 +24,10 @@ The fantastic ORM library for Golang, aims to be developer friendly.
 * Extendable, write Plugins based on GORM callbacks
 * Every feature comes with tests
 * Developer Friendly
+## 修改版本特别说明
+* 去掉了表名自动转换成小写和加复数（现在struct写什么表名就是什么）
+* 去掉了列名自动转换成小学和加下划线，现在struct写什么就是什么
+* 其它不变，计划未来把 UpdataAt/CreatedAt 变成updated_at/created_at
 
 ## Getting Started
 
